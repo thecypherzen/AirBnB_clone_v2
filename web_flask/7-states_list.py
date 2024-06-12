@@ -22,7 +22,6 @@ def list_states():
     res = storage.all(State)
     states = dict(sorted(res.items(),
                          key=lambda state_obj: state_obj[1].name))
-    print(states.values())
     return render_template('7-states_list.html',
                            states=states.values())
 

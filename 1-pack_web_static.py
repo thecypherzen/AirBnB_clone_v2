@@ -1,7 +1,19 @@
+'''Defines tasks used for web_static deployment
+
+   do_pack(:obj): a function creating .tgz archive of files to deploy.
+'''
 from fabric.api import hide, local, settings
 
 
 def do_pack():
+    '''A function that creates a .tgz archive from web_static folder
+    - 1. Creates the versions directory if not exists
+    - 2. Creates archive with name in the format
+         `web_static_<year><month><day><hour><minute><second>.tgz`
+         saved in versions directory
+    Returns
+        path to archive on success or None otherwise.
+    '''
     folder = "versions"
 
     with settings(warn_only=True):

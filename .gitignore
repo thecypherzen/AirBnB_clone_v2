@@ -1,3 +1,5 @@
 *~
 *#
 send
+*__pycache__*
+*.pyc

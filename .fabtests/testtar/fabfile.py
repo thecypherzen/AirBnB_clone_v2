@@ -47,7 +47,7 @@ def usr_files():
 
 @hosts("web01_ubuntu")
 def get_name():
-    res = run("ls ~/", quiet=True)
+    res = run("hostname", quiet=True)
     if res.succeeded:
         print(res.stdout)
     else:

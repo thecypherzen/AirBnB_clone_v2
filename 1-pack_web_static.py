@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 '''Defines tasks used for web_static deployment
 
    do_pack(:obj): a function creating .tgz archive of files to deploy.

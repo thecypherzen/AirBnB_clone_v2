@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """A flask app serving hbnb version 2"""
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
 from models import storage
 from models.state import State
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def close_storage(err):
+def close_storage(exception):
     """Closes storage session"""
     storage.close()
 

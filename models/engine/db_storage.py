@@ -4,12 +4,6 @@ Contains the class DBStorage
 """
 
 import models
-'''
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-from models.user import User
-'''
 from models.base_model import BaseModel, Base
 from models.city import City
 from models.state import State
@@ -17,6 +11,13 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+
+'''
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.user import User
+'''
 
 classes = {"State": State, "City": City}
 

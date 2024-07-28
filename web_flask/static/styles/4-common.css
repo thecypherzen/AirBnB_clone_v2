@@ -8,6 +8,6 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    width: clamp(580px, 90vw, 1000px);
     margin: 30px auto;
 }

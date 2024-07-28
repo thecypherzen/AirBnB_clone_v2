@@ -35,13 +35,13 @@ class HBNBCommand(cmd.Cmd):
 
     def _key_value_parser(self, args):
         """creates a dictionary from a list of strings"""
+
         new_dict = {}
         for arg in args:
             if "=" in arg:
-                kvp = arg.split('=', 1)
-                key = kvp[0]
-                value = kvp[1]
-                if value[0] == value[-1] == '"':
+                key, value = arg.split('=', 1)
+                if any([value[0] == value[-1] == '"',
+                       value[0] == value[-1] == "'"]):
                     value = shlex.split(value)[0].replace('_', ' ')
                 else:
                     try:
@@ -50,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
                         try:
                             value = float(value)
                         except Exception:
-                            continue
+                            value = str(value)
                 new_dict[key] = value
         return new_dict
 

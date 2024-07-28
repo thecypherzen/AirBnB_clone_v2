@@ -20,6 +20,8 @@ def states_list():
     """fetches sorted list of all states in db"""
     states = sorted(storage.all(State).values(),
                     key=lambda state: state.name)
+    states = list(map(lambda state: state.to_dict(), states))
+    print(states[0])
     return render_template("7-states_list.html", states=states)
 
 

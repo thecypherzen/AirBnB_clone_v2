@@ -10,6 +10,7 @@ from sqlalchemy.orm import relationship
 
 
 class State(BaseModel, Base):
+
     """Representation of state """
     def __init__(self, *args, **kwargs):
         """initializes state"""

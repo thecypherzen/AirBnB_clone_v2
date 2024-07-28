@@ -10,25 +10,30 @@ from models.city import City
 app = Flask(__name__)
 
 
+@app.route("/states", strict_slashes=False)
+def states_list():
+    """fetches sorted list of all states in db"""
+    states = sorted(storage.all(State).values(),
+                    key=lambda state: state.name)
+    states = list(map(lambda state: state.to_dict(), states))
+    return render_template("7-states_list.html", states=states)
+
+
+@app.route("/states/<string:id>", strict_slashes=False)
+def states_cities(id):
+    """fetches a state by its id"""
+    state = storage.get(State, id)
+    if not state:
+        return render_template("404_notfound.html")
+    cities = [city.to_dict() for city in state.cities]
+    return render_template("9-states.html",
+                           name=state.to_dict()["name"], cities=cities)
+
+
 @app.teardown_appcontext
 def close_storage(err):
     """Closes storage session"""
     storage.close()
-
-
-@app.route("/cities_by_states", strict_slashes=False)
-def states_list():
-    """fetches sorted list of all states in db with their cities
-    """
-    all_states = []
-    states = sorted(storage.all(State).values(),
-                    key=lambda state: state.name)
-    for state in states:
-        state_dict = state.to_dict()
-        state_dict["cities"] = [city.to_dict() for city in state.cities]
-        all_states.append(state_dict)
-    return render_template("8-cities_by_states.html",
-                           states=all_states)
 
 
 if __name__ == "__main__":

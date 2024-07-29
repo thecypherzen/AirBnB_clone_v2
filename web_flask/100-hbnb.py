@@ -26,10 +26,14 @@ def populate_fileters():
     state_objs = storage.all(State).values()
     for state_obj in state_objs:
         state_dict = state_obj.to_dict()
+
+        # get cities in current state
         state_dict["cities"] = []
         for city in state_obj.cities:
             city_dict = city.to_dict()
             city_dict["places"] = [place.to_dict() for place in city.places]
+
+            # get places in current city
             for place in city_dict["places"]:
                 place["owner"] = storage.get(User, place["user_id"]).to_dict()
             state_dict["cities"].append(city_dict)

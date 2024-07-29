@@ -57,12 +57,13 @@ ul {
 }
 
 .popover li:hover {
-    li {
-	width: 70%;
-	margin: auto;
-	border-radius: 10px;
-    }
-    background: #DDDDDD66;
+    background-color: #DDDDDD66;
+}
+
+.popover li li:hover {
+    width: 70%;
+    margin: auto;
+    border-radius: 10px;
 }
 
 .amenities .popover li:hover {

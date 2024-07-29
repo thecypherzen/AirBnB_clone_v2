@@ -39,6 +39,7 @@
     padding: 25px 0px;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .locations:hover .popover {
@@ -55,7 +56,17 @@ ul {
 	padding-bottom: 20px;
 }
 
-li {
+.popover li:hover {
+    li {
+	width: 70%;
+	margin: auto;
+	border-radius: 10px;
+    }
+    background: #DDDDDD66;
+}
+
+.amenities .popover li:hover {
+    border-radius: 10px;
 }
 
 h2 {

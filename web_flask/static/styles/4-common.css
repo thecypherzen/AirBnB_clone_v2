@@ -11,3 +11,7 @@ body {
     width: clamp(580px, 90vw, 1000px);
     margin: 30px auto;
 }
+
+.content {
+    min-height: calc(100vh - 264px);
+}

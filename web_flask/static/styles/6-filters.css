@@ -25,8 +25,9 @@
 
 .popover {
     position: absolute;
-    left: 0px;
-    bottom: -70px;
+    left: -1px;
+    z-index: 10;
+    top: 62px;
     list-style-type: none;
     display: none;
     background-color: #FAFAFA;

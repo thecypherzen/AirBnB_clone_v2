@@ -7,7 +7,7 @@
 from fabric.api import env, hosts, hide, local, put, run, settings
 
 
-env.hosts = ["34.239.254.5", "18.204.14.172"]
+env.hosts = ["52.90.198.170"]
 
 
 def do_pack():
@@ -47,23 +47,19 @@ def do_deploy(archive_path):
     with hide("everything"):
         if local(f"test -f {archive_path}").failed:
             return False
-    dirname = archive_path.split('/')[1].split('.')[0]
-    remote_arch = put(archive_path, "/tmp")[0]
-    dest = f"/data/web_static/releases/{dirname}"
-    curr_link = "/data/web_static/current"
-    if run(f"mkdir -p {dest}").failed:
+    try:
+        dirname = archive_path.split('/')[1].split('.')[0]
+        remote_arch = put(archive_path, "/tmp")[0]
+        dest = f"/data/web_static/releases/{dirname}"
+        curr_link = "/data/web_static/current"
+        run(f"mkdir -p {dest}")
+        run(f"tar -xf {remote_arch} -C {dest}")
+        run(f"rm -f {remote_arch}")
+        run(f"cp -rf {dest}/web_static/* {dest}")
+        run(f"rm -rf {dest}/web_static")
+        run(f"unlink {curr_link}")
+        run(f"ln -s {dest} {curr_link}")
+        print("New version deployed!")
+        return True
+    except Exception:
         return False
-    if run(f"tar -xf {remote_arch} -C {dest}").failed:
-        return False
-    if run(f"rm -f {remote_arch}").failed:
-        return False
-    if run(f"cp -rf {dest}/web_static/* {dest}").failed:
-        return False
-    if run(f"rm -rf {dest}/web_static").failed:
-        return False
-    if run(f"unlink {curr_link}").failed:
-        return False
-    if run(f"ln -s {dest} {curr_link}").failed:
-        return False
-    print("New version deployed!")
-    return True

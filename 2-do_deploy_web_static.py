@@ -52,6 +52,7 @@ def do_deploy(archive_path):
         remote_arch = put(archive_path, "/tmp")[0]
         dest = f"/data/web_static/releases/{dirname}"
         curr_link = "/data/web_static/current"
+        run("0-setup_web_static.sh")
         run(f"mkdir -p {dest}")
         run(f"tar -xf {remote_arch} -C {dest}")
         run(f"rm -f {remote_arch}")

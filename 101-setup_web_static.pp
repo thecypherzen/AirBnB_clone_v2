@@ -1,3 +1,4 @@
+# sets up a new machine for deploy backup
 exec {'update packages':
   command => 'apt update',
   user    => 'root',
